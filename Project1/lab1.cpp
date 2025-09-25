@@ -11,6 +11,6 @@ WeightedRandom::WeightedRandom(const vector<int>& v, const vector<int>& w)
 }
 
 int WeightedRandom::operator()() {
-	ind idx = dist(gen);
+	int idx = dist(gen);
 	return values[idx];
 }

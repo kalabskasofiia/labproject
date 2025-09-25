@@ -12,36 +12,36 @@ int main() {
 
     try {
         string filename;
-        cout << "Введіть назву файлу: ";
+        cout << "Р’РІРµРґС–С‚СЊ РЅР°Р·РІСѓ С„Р°Р№Р»Сѓ: ";
         cin >> filename;
 
         ifstream fin(filename);
         if (!fin) {
-            throw runtime_error("Не вдалося відкрити файл!");
+            throw runtime_error("РќРµ РІРґР°Р»РѕСЃСЏ РІС–РґРєСЂРёС‚Рё С„Р°Р№Р»!");
         }
 
         int N;
-        fin >> N; // кількість генерацій
+        fin >> N; // РєС–Р»СЊРєС–СЃС‚СЊ РіРµРЅРµСЂР°С†С–Р№
         if (!fin || N <= 0) {
-            throw runtime_error("Некоректне N (має бути натуральним числом).");
+            throw runtime_error("РќРµРєРѕСЂРµРєС‚РЅРµ N (РјР°С” Р±СѓС‚Рё РЅР°С‚СѓСЂР°Р»СЊРЅРёРј С‡РёСЃР»РѕРј).");
         }
 
         vector<int> values, weights;
         int x;
 
-        // читаємо числа
+        // С‡РёС‚Р°С”РјРѕ С‡РёСЃР»Р°
         while (fin >> x) {
             values.push_back(x);
             if (fin.peek() == '\n') break;
         }
 
-        // читаємо ваги
+        // С‡РёС‚Р°С”РјРѕ РІР°РіРё
         while (fin >> x) {
             weights.push_back(x);
         }
 
         if (values.size() != weights.size() || values.empty()) {
-            throw runtime_error("Кількість чисел і частот не співпадає або вони порожні.");
+            throw runtime_error("РљС–Р»СЊРєС–СЃС‚СЊ С‡РёСЃРµР» С– С‡Р°СЃС‚РѕС‚ РЅРµ СЃРїС–РІРїР°РґР°С” Р°Р±Рѕ РІРѕРЅРё РїРѕСЂРѕР¶РЅС–.");
         }
 
         WeightedRandom generator(values, weights);
@@ -52,11 +52,8 @@ int main() {
             freq[val]++;
         }
 
-        cout << "\nРезультати генерації:\n";
-        cout << setw(10) << "Число"
-            << setw(15) << "Задана частота"
-            << setw(20) << "Отримана частота\n";
-
+        cout << "\nР РµР·СѓР»СЊС‚Р°С‚Рё РіРµРЅРµСЂР°С†С–С—:\n";
+      
         double maxDiff = 0.0;
         int sumWeights = 0;
         for (int w : weights) sumWeights += w;
@@ -66,19 +63,17 @@ int main() {
             double real = (double)freq[values[i]] / N;
             maxDiff = max(maxDiff, abs(expected - real));
 
-            cout << setw(10) << values[i]
-                << setw(15) << fixed << setprecision(3) << expected
-                << setw(20) << fixed << setprecision(3) << real << "\n";
+            cout << values[i] <<"   " << expected << "   " << real << "\n";
         }
 
-        cout << "\nНайбільша розбіжність: " << fixed << setprecision(3) << maxDiff << "\n";
+        cout << "\nРќР°Р№Р±С–Р»СЊС€Р° СЂРѕР·Р±С–Р¶РЅС–СЃС‚СЊ: " << fixed << setprecision(3) << maxDiff << "\n";
     }
     catch (const exception& e) {
-        cout << "Помилка: " << e.what() << "\n";
+        cout << "РџРѕРјРёР»РєР°: " << e.what() << "\n";
         return 1;
     }
     catch (...) {
-        cout << "Невідома помилка!\n";
+        cout << "РќРµРІС–РґРѕРјР° РїРѕРјРёР»РєР°!\n";
         return 1;
     }
 

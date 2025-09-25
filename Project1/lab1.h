@@ -4,7 +4,7 @@
 
 using namespace std;
 
-class lab1
+class WeightedRandom
 {
 	vector<int> values;
 	vector<int> weights;

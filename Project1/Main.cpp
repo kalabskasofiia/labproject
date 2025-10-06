@@ -21,7 +21,7 @@ int main() {
         }
 
         int N;
-        fin >> N; // кількість генерацій
+        fin >> N;
         if (!fin || N <= 0) {
             throw runtime_error("Некоректне N (має бути натуральним числом).");
         }
@@ -29,13 +29,11 @@ int main() {
         vector<int> values, weights;
         int x;
 
-        // читаємо числа
         while (fin >> x) {
             values.push_back(x);
             if (fin.peek() == '\n') break;
         }
 
-        // читаємо ваги
         while (fin >> x) {
             weights.push_back(x);
         }

@@ -1,6 +1,4 @@
-// Компілятор: MSVC 19.3x (Visual Studio 2022) / GCC 12+ / Clang 15+
-// Стандарт: C++20
-// Збірка: Release mode
+// Компілятор: MSVC 19.3x
 
 #include <iostream>
 #include <vector>

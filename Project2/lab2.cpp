@@ -22,17 +22,6 @@ double MeasureExecutionTime(Function&& f) {
     return chrono::duration<double, milli>(end - start).count();
 }
 
-// Послідовний підрахунок середнього абсолютних різниць
-double CalculateMeanDiff(const vector<double>& data) {
-    if (data.size() < 2) return 0.0;
-
-    double sum = 0.0;
-    for (size_t i = 1; i < data.size(); i++) {
-        sum += abs(data[i] - data[i - 1]);
-    }
-    return sum / (data.size() - 1);
-}
-
 // Паралельна версія з K потоками
 double ParallelMeanDiff(const vector<double>& data, int K) {
     if (data.size() < 2) return 0.0;
@@ -75,10 +64,8 @@ void AnalyzeMeanDiffPerformance(const vector<double>& data) {
     int bestK = 0;
 
     cout << "\n\nЧастина 2: K-way паралелізація\n";
-    cout << "================================\n";
     cout << "Розмір даних: " << data.size() << "\n\n";
-    cout << setw(5) << "K" << setw(15) << "Час (мс)" << setw(20) << "Результат\n";
-    cout << string(40, '-') << "\n";
+    cout << setw(5) << "K" << setw(20) << "Час (мс)" << setw(30) << "Результат\n";
 
     for (int K = 1; K <= maxThreads * 2; K++) {
         double result = 0.0;
@@ -96,7 +83,6 @@ void AnalyzeMeanDiffPerformance(const vector<double>& data) {
     }
 
     cout << "\n\nВисновки:\n";
-    cout << "---------\n";
     cout << "Найкраще K: " << bestK << "\n";
     cout << "Найкращий час: " << fixed << setprecision(6) << bestTime << " мілісекунд\n";
     cout << "Кількість потоків процесора: " << maxThreads << "\n";
@@ -108,7 +94,6 @@ int main() {
     system("chcp 65001 ");
 
     cout << "Дослідження adjacent_difference\n";
-    cout << "================================\n\n";
 
     mt19937_64 rng(42);
     uniform_real_distribution<double> dist(-100000.0, 100000.0);
@@ -116,7 +101,6 @@ int main() {
     vector<size_t> sizes = { 10000, 100000, 1000000, 5000000 };
 
     cout << "Частина 1: Порівняння різних підходів\n";
-    cout << "--------------------------------------\n";
 
     for (size_t n : sizes) {
         vector<double> data(n);
